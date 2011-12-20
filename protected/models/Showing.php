@@ -13,8 +13,8 @@
  *
  * The followings are the available model relations:
  * @property Booking[] $bookings
- * @property Price $price
  * @property Film $film
+ * @property Price $price
  * @property Screen $screen
  */
 class Showing extends CActiveRecord
@@ -46,7 +46,7 @@ class Showing extends CActiveRecord
 		return array(
 			array('film_id, screen_id, start_date, start_time, price_id', 'required'),
 			array('film_id, screen_id, price_id', 'length', 'max'=>10),
-			array('start_time', 'date','format'=>'yyyy-MM-dd'),
+			array('start_date', 'date','format'=>'yyyy-MM-dd'),
 			array('start_time', 'type', 'type'=>'time', 'timeFormat'=>'hh:mm'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -63,8 +63,8 @@ class Showing extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'bookings' => array(self::HAS_MANY, 'Booking', 'showing_id'),
-			'price' => array(self::BELONGS_TO, 'Price', 'price_id'),
 			'film' => array(self::BELONGS_TO, 'Film', 'film_id'),
+			'price' => array(self::BELONGS_TO, 'Price', 'price_id'),
 			'screen' => array(self::BELONGS_TO, 'Screen', 'screen_id'),
 		);
 	}

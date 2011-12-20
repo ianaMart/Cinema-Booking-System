@@ -30,7 +30,7 @@ class ShowingController extends Controller
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+			array('allow', // allow admin user to perform all other actions
 				'actions'=>array('create','update','admin','delete'),
 				'users'=>array('admin'),
 			),
