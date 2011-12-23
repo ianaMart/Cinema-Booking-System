@@ -34,7 +34,7 @@
 				array('label'=>'Showing', 'url'=>array('/showing')),
 				array('label'=>'Seat', 'url'=>array('/seat'), 'visible'=>Yii::app()->user->name=='admin'),
 				array('label'=>'Screenseat', 'url'=>array('/screenseat'), 'visible'=>Yii::app()->user->name=='admin'),
-				array('label'=>'Booking', 'url'=>array('/booking')),
+				array('label'=>'Booking', 'url'=>array('/booking/create'), 'visible'=>!Yii::app()->user->isGuest),
 				array('label'=>'Seatbooked', 'url'=>array('/seatbooked')),
 				array('label'=>'User', 'url'=>array('/user'), 'visible'=>Yii::app()->user->name=='admin'),
 				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),

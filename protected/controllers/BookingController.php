@@ -26,16 +26,12 @@ class BookingController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','getDatesShowing','getTimesShowing'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('index','view','update','admin','delete'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -66,9 +62,10 @@ class BookingController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Booking']))
+		if(isset($_POST['showing_id']))
 		{
-			$model->attributes=$_POST['Booking'];
+			$model->showing_id=$_POST['showing_id'];
+			$model->user_id=Yii::app()->user->getId();
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->booking_id));
 		}
@@ -76,6 +73,28 @@ class BookingController extends Controller
 		$this->render('create',array(
 			'model'=>$model,
 		));
+	}
+	
+	public function actionGetDatesShowing()
+	{
+		$data=Showing::model()->findAll('film_id=:film_id', array(':film_id'=>(int) $_POST['film_id']));
+		$data=CHtml::listData($data,'start_date','start_date');
+		echo '<option value="">Choose a date</option>';
+		foreach($data as $value=>$name)
+		{
+			echo CHtml::tag('option', array('value'=>$value),CHtml::encode($name),true);
+		}
+	}
+	
+	public function actionGetTimesShowing()
+	{
+		$data=Showing::model()->findAll('start_date=:start_date', array(':start_date'=>$_POST['start_date']));
+		$data=CHtml::listData($data,'showing_id','start_time');
+		echo '<option value="">Choose a time</option>';
+		foreach($data as $value=>$name)
+		{
+			echo CHtml::tag('option', array('value'=>$value),CHtml::encode($name),true);
+		}
 	}
 
 	/**
