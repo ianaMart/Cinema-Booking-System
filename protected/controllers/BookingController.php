@@ -77,7 +77,14 @@ class BookingController extends Controller
 	
 	public function actionGetDatesShowing()
 	{
-		$data=Showing::model()->findAll('film_id=:film_id', array(':film_id'=>(int) $_POST['film_id']));
+		$sql='SELECT start_date
+		      FROM tbl_showing
+			  WHERE film_id=:film_id
+			  ORDER BY start_date ASC';
+		$params=array(':film_id'=>(int) $_POST['film_id']);
+		
+		$data=Showing::model()->findAllBySql($sql,$params);
+		
 		$data=CHtml::listData($data,'start_date','start_date');
 		echo '<option value="">Choose a date</option>';
 		foreach($data as $value=>$name)
@@ -88,7 +95,15 @@ class BookingController extends Controller
 	
 	public function actionGetTimesShowing()
 	{
-		$data=Showing::model()->findAll('start_date=:start_date', array(':start_date'=>$_POST['start_date']));
+		$sql='SELECT showing_id, start_time
+		      FROM tbl_showing
+			  WHERE film_id=:film_id
+			  AND start_date=:start_date
+			  ORDER BY start_time ASC';
+		$params=array(':film_id'=>(int) $_POST['film_id'],':start_date'=>$_POST['start_date']);
+		
+		$data=Showing::model()->findAllBySql($sql,$params);
+		
 		$data=CHtml::listData($data,'showing_id','start_time');
 		echo '<option value="">Choose a time</option>';
 		foreach($data as $value=>$name)
