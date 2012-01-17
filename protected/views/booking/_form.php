@@ -5,19 +5,21 @@
 	'enableAjaxValidation'=>false,
 ));
 
-$film=Film::model()->findAll();
-$filmlist=CHtml::listData($film,'film_id','title'); ?>
+$showing=Showing::model()->findAll();
+$showingList=CHtml::listData($showing,'start_date','start_date');
+
+ ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo CHtml::dropDownList('film_id','', $filmlist, array('empty' => 'Choose a film', 'ajax' => array('type'=>'POST','url'=>CController::createUrl('getDatesShowing'),'update'=>'#start_date'))); ?>
+		<?php echo CHtml::dropDownList('start_date','', $showingList, array('empty' => 'Choose a date', 'ajax' => array('type'=>'POST','url'=>CController::createUrl('getFilmsShowing'),'update'=>'#film_id'))); ?>
 	</div>
 
 	<div class="row">
-		<?php echo CHtml::dropDownList('start_date','', array(), array('ajax' => array('type'=>'POST','url'=>CController::createUrl('getTimesShowing'),'update'=>'#showing_id'))); ?>
+		<?php echo CHtml::dropDownList('film_id','', array(), array('ajax' => array('type'=>'POST','url'=>CController::createUrl('getTimesShowing'),'update'=>'#showing_id'))); ?>
 	</div>
     
     <div class="row buttons">
