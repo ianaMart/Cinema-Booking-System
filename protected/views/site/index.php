@@ -12,3 +12,22 @@
 	<li>View file: <tt><?php echo __FILE__; ?></tt></li>
 	<li>Layout file: <tt><?php echo $this->getLayoutFile('main'); ?></tt></li>
 </ul>
+
+<?php
+//$connection=Yii::app()->db;
+//$sql='SELECT *
+//FROM tbl_film';
+//$command=$connection->createCommand($sql);
+//$rows=$command->queryAll();
+//var_dump($rows);
+
+$this->widget('zii.widgets.CListView', array(
+    'dataProvider'=>$dataProvider,
+    'itemView'=>'_view',   // refers to the partial view
+/*    'sortableAttributes'=>array(
+        'film_id',
+        'rating',
+    ),*/
+));
+
+//var_dump($dataProvider->getData());
