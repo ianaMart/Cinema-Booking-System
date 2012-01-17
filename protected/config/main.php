@@ -79,5 +79,6 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'example@example.com',
+		'rtApiKey'=>'cjc8gt5d555bbrxjkztacxzb',
 	),
 );

@@ -16,7 +16,7 @@ $this->menu=array(
 <h1><?php echo $model->title; ?></h1>
 
 <?php
-$apikey = 'cjc8gt5d555bbrxjkztacxzb';
+$apikey = Yii::app()->params['rtApiKey'];
 $query = urlencode($model->title); // make sure to url encode an query parameters
 
 // construct the query with our apikey and the query we want to make
