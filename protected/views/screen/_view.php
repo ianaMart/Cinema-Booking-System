@@ -8,5 +8,9 @@
 	<?php echo CHtml::encode($data->screen); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('seating_capacity')); ?>:</b>
+	<?php echo CHtml::encode($data->seating_capacity); ?>
+	<br />
+
 
 </div>

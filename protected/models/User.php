@@ -13,8 +13,7 @@
  */
 class User extends CActiveRecord
 {
-	private $salt = '$2a$07$1234567890123456789099$';
-	
+	private $salt = '$2a$07$1968062480318304370756$';
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return User the static model class

@@ -12,5 +12,13 @@
 	<?php echo CHtml::encode($data->showing_id); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('total_price')); ?>:</b>
+	<?php echo CHtml::encode($data->total_price); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('no_of_seats_booked')); ?>:</b>
+	<?php echo CHtml::encode($data->no_of_seats_booked); ?>
+	<br />
+
 
 </div>

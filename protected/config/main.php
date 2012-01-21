@@ -47,10 +47,10 @@ return array(
 		*/
 		// uncomment the following to use a MySQL database
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=testdrive',
+			'connectionString' => 'mysql:host=localhost;dbname=cinema',
 			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => '',
+			'username' => 'sonu27',
+			'password' => 'aDysmJbwYG6HrvEZ',
 			'charset' => 'utf8',
 		),
 		'errorHandler'=>array(
@@ -77,8 +77,6 @@ return array(
 	// application-level parameters that can be accessed
 	// using Yii::app()->params['paramName']
 	'params'=>array(
-		// this is used in contact page
-		'adminEmail'=>'example@example.com',
 		'rtApiKey'=>'cjc8gt5d555bbrxjkztacxzb',
 	),
 );

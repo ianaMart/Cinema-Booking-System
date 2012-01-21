@@ -21,5 +21,7 @@ $this->menu=array(
 		'booking_id',
 		'user_id',
 		'showing_id',
+		'total_price',
+		'no_of_seats_booked',
 	),
 )); ?>

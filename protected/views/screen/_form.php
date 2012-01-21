@@ -21,6 +21,12 @@
 		<?php echo $form->error($model,'screen'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'seating_capacity'); ?>
+		<?php echo $form->textField($model,'seating_capacity',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->error($model,'seating_capacity'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>

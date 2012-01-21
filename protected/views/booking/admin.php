@@ -45,6 +45,8 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'booking_id',
 		'user_id',
 		'showing_id',
+		'total_price',
+		'no_of_seats_booked',
 		array(
 			'class'=>'CButtonColumn',
 		),

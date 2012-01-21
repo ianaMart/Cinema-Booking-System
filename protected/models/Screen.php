@@ -6,15 +6,16 @@
  * The followings are the available columns in table 'tbl_screen':
  * @property string $screen_id
  * @property string $screen
+ * @property string $seating_capacity
  *
  * The followings are the available model relations:
- * @property ScreenSeat[] $screenSeats
  * @property Showing[] $showings
  */
 class Screen extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
+	 * @param string $className active record class name.
 	 * @return Screen the static model class
 	 */
 	public static function model($className=__CLASS__)
@@ -38,11 +39,12 @@ class Screen extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('screen', 'required'),
+			array('screen_id, screen, seating_capacity', 'required'),
+			array('screen_id, seating_capacity', 'length', 'max'=>10),
 			array('screen', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('screen_id, screen', 'safe', 'on'=>'search'),
+			array('screen_id, screen, seating_capacity', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -54,7 +56,6 @@ class Screen extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'screenSeats' => array(self::HAS_MANY, 'ScreenSeat', 'screen_id'),
 			'showings' => array(self::HAS_MANY, 'Showing', 'screen_id'),
 		);
 	}
@@ -67,6 +68,7 @@ class Screen extends CActiveRecord
 		return array(
 			'screen_id' => 'Screen',
 			'screen' => 'Screen',
+			'seating_capacity' => 'Seating Capacity',
 		);
 	}
 
@@ -83,6 +85,7 @@ class Screen extends CActiveRecord
 
 		$criteria->compare('screen_id',$this->screen_id,true);
 		$criteria->compare('screen',$this->screen,true);
+		$criteria->compare('seating_capacity',$this->seating_capacity,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

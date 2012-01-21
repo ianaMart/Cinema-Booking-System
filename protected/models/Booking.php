@@ -7,16 +7,18 @@
  * @property string $booking_id
  * @property string $user_id
  * @property string $showing_id
+ * @property string $total_price
+ * @property string $no_of_seats_booked
  *
  * The followings are the available model relations:
- * @property User $user
  * @property Showing $showing
- * @property SeatBooked[] $seatBookeds
+ * @property User $user
  */
 class Booking extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
+	 * @param string $className active record class name.
 	 * @return Booking the static model class
 	 */
 	public static function model($className=__CLASS__)
@@ -40,11 +42,11 @@ class Booking extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, showing_id', 'required'),
-			array('user_id, showing_id', 'length', 'max'=>10),
+			array('user_id, showing_id, no_of_seats_booked', 'required'),
+			array('user_id, showing_id, total_price, no_of_seats_booked', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('booking_id, user_id, showing_id', 'safe', 'on'=>'search'),
+			array('booking_id, user_id, showing_id, total_price, no_of_seats_booked', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -56,9 +58,8 @@ class Booking extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 			'showing' => array(self::BELONGS_TO, 'Showing', 'showing_id'),
-			'seatBookeds' => array(self::HAS_MANY, 'SeatBooked', 'booking_id'),
+			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 		);
 	}
 
@@ -71,6 +72,8 @@ class Booking extends CActiveRecord
 			'booking_id' => 'Booking',
 			'user_id' => 'User',
 			'showing_id' => 'Showing',
+			'total_price' => 'Total Price',
+			'no_of_seats_booked' => 'No Of Seats Booked',
 		);
 	}
 
@@ -88,6 +91,8 @@ class Booking extends CActiveRecord
 		$criteria->compare('booking_id',$this->booking_id,true);
 		$criteria->compare('user_id',$this->user_id,true);
 		$criteria->compare('showing_id',$this->showing_id,true);
+		$criteria->compare('total_price',$this->total_price,true);
+		$criteria->compare('no_of_seats_booked',$this->no_of_seats_booked,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
