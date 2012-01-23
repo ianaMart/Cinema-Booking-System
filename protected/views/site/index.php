@@ -23,11 +23,8 @@
 
 $this->widget('zii.widgets.CListView', array(
     'dataProvider'=>$dataProvider,
-    'itemView'=>'_view',   // refers to the partial view
-/*    'sortableAttributes'=>array(
-        'film_id',
-        'rating',
-    ),*/
+    'itemView'=>'_view',
+    'template' => "{items}",
 ));
 
 //var_dump($dataProvider->getData());
