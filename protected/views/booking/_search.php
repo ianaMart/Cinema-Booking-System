@@ -21,13 +21,13 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'total_price'); ?>
-		<?php echo $form->textField($model,'total_price',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->label($model,'no_of_seats_booked'); ?>
+		<?php echo $form->textField($model,'no_of_seats_booked',array('size'=>1,'maxlength'=>1)); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'no_of_seats_booked'); ?>
-		<?php echo $form->textField($model,'no_of_seats_booked',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->label($model,'total_price'); ?>
+		<?php echo $form->textField($model,'total_price',array('size'=>5,'maxlength'=>5)); ?>
 	</div>
 
 	<div class="row buttons">

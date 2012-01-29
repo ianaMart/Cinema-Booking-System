@@ -27,7 +27,7 @@ class BookingController extends Controller
 	{
 		return array(
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','getDatesShowing','getTimesShowing'),
+				'actions'=>array('create','getDatesShowing','getTimesShowing','actionGetSeatsAvailable()','actionCalculateTotalPrice()','actionCalculatePrice()'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -59,13 +59,12 @@ class BookingController extends Controller
 	{
 		$model=new Booking;
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
 		if(isset($_POST['showing_id']))
-		{
-			$model->showing_id=$_POST['showing_id'];
+		{            
 			$model->user_id=Yii::app()->user->getId();
+			$model->showing_id=$_POST['showing_id'];
+            $model->no_of_seats_booked=$_POST['no_of_seats_booked'];
+            $model->total_price=(BookingController::actionCalculatePrice($_POST['showing_id'])) * $_POST['no_of_seats_booked'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->booking_id));
 		}
@@ -111,6 +110,68 @@ class BookingController extends Controller
 			echo CHtml::tag('option', array('value'=>$value),CHtml::encode($name),true);
 		}
 	}
+    
+    public function actionGetSeatsAvailable()
+	{
+        $connection=Yii::app()->db;
+        $sql='SELECT (seating_capacity - sum(no_of_seats_booked)) AS "Seats Available",
+              seating_capacity AS "Seating Capacity"
+              FROM {{showing}} AS h
+              INNER JOIN {{booking}} AS b
+              ON h.showing_id = b.showing_id
+              INNER JOIN {{screen}} AS c
+              ON h.screen_id = c.screen_id
+              WHERE h.showing_id = :showing;';
+        
+        $command=$connection->createCommand($sql);
+        $showing_id=$_POST['showing_id'];
+        $command->bindParam(":showing",$showing_id,PDO::PARAM_STR);
+        $row=$command->queryRow();
+        
+        if ($row['Seats Available']==null)
+            echo $row['Seating Capacity'];
+        else
+            echo $row['Seats Available'];
+	}
+    
+    public function actionCalculateTotalPrice()
+    {
+        $connection=Yii::app()->db;
+        $sql='SELECT price
+              FROM {{price}} AS p
+              INNER JOIN {{showing}} AS h
+              ON h.price_id = p.price_id
+              WHERE h.showing_id = :showing;';
+        
+        $command=$connection->createCommand($sql);
+        $showing_id=$_POST['showing_id'];
+        $command->bindParam(":showing",$showing_id,PDO::PARAM_STR);
+        $row=$command->queryRow();
+        
+        if(isset($_POST['no_of_seats_booked']) && isset($_POST['showing_id']))
+        {
+            echo $row['price'] * $_POST['no_of_seats_booked'];
+        }
+        else
+            echo 'Error';
+    }
+    
+    public static function actionCalculatePrice($showing_id)
+    {
+        $connection=Yii::app()->db;
+        $sql='SELECT price
+              FROM {{price}} AS p
+              INNER JOIN {{showing}} AS h
+              ON h.price_id = p.price_id
+              WHERE h.showing_id = :showing;';
+        
+        $command=$connection->createCommand($sql);
+        $command->bindParam(":showing",$showing_id,PDO::PARAM_STR);
+        $row=$command->queryRow();
+        
+        return $row['price'];
+    }
+      
 
 	/**
 	 * Updates a particular model.

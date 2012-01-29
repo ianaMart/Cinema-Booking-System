@@ -14,17 +14,8 @@
 </ul>
 
 <?php
-//$connection=Yii::app()->db;
-//$sql='SELECT *
-//FROM tbl_film';
-//$command=$connection->createCommand($sql);
-//$rows=$command->queryAll();
-//var_dump($rows);
-
 $this->widget('zii.widgets.CListView', array(
     'dataProvider'=>$dataProvider,
     'itemView'=>'_view',
     'template' => "{items}",
 ));
-
-//var_dump($dataProvider->getData());
