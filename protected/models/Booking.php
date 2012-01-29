@@ -42,7 +42,7 @@ class Booking extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, showing_id, no_of_seats_booked', 'required'),
+			array('user_id, showing_id, no_of_seats_booked, total_price', 'required'),
 			array('user_id, showing_id', 'length', 'max'=>10),
 			array('no_of_seats_booked', 'length', 'max'=>1),
 			array('total_price', 'length', 'max'=>5),
