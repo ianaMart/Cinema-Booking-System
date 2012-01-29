@@ -58,17 +58,26 @@ class UserController extends Controller
 	public function actionCreate()
 	{
 		$model=new User;
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+        
+        $this->performAjaxValidation($model);
 
 		if(isset($_POST['User']))
 		{
-			//$model->attributes=$_POST['User'];
-			$model->email=$_POST['User']['email'];
-			$model->password=$model->hashPassword($_POST['User']['password']);
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->user_id));
+			// Manual password length validation, find better fix.
+            if (strlen($_POST['User']['password']) >= 8)
+            {
+                $model->email=$_POST['User']['email'];
+                $model->password=$model->hashPassword($_POST['User']['password']);
+                
+                if($model->save())
+                    $this->redirect(array('view','id'=>$model->user_id));
+            }
+            else
+            {
+                $model->email=$_POST['User']['email'];
+                $model->password=$_POST['User']['password'];
+                $model->validate();
+            }
 		}
 
 		$this->render('create',array(
@@ -84,16 +93,29 @@ class UserController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+        
+        // Security fix, to not output password
+        $model->password='';
+        
+		$this->performAjaxValidation($model);
 
 		if(isset($_POST['User']))
 		{
-			$model->email=$_POST['User']['email'];
-			$model->password=$model->hashPassword($_POST['User']['password']);
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->user_id));
+			// Manual password length validation, find better fix.
+            if (strlen($_POST['User']['password']) >= 8)
+            {
+                $model->email=$_POST['User']['email'];
+                $model->password=$model->hashPassword($_POST['User']['password']);
+                
+                if($model->save())
+                    $this->redirect(array('view','id'=>$model->user_id));
+            }
+            else
+            {
+                $model->email=$_POST['User']['email'];
+                $model->password=$_POST['User']['password'];
+                $model->validate();
+            }
 		}
 
 		$this->render('update',array(
