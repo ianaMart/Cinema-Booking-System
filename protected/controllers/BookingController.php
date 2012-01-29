@@ -27,7 +27,7 @@ class BookingController extends Controller
 	{
 		return array(
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','getDatesShowing','getTimesShowing','actionGetSeatsAvailable()','actionCalculateTotalPrice()','actionCalculatePrice()'),
+				'actions'=>array('create','getDatesShowing','getTimesShowing','getSeatsAvailable','calculateTotalPrice','calculatePrice'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -64,7 +64,7 @@ class BookingController extends Controller
 			$model->user_id=Yii::app()->user->getId();
 			$model->showing_id=$_POST['showing_id'];
             $model->no_of_seats_booked=$_POST['no_of_seats_booked'];
-            $model->total_price=(BookingController::actionCalculatePrice($_POST['showing_id'])) * $_POST['no_of_seats_booked'];
+            $model->total_price=(BookingController::actionCalculatePrice($_POST['showing_id']) * $_POST['no_of_seats_booked']);
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->booking_id));
 		}
