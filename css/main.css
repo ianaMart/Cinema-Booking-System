@@ -1,25 +1,59 @@
+.poster {
+  position: relative;
+  display: inline;
+  margin: 5px 0 10px 0;
+}
+.poster p {
+  margin:0;
+  padding: 15px 0 50px 0;
+  margin-bottom: 5px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #fff;
+  background-color: rgba(0,0,0,0.7);
+  opacity: 0;
+  -webkit-transition: opacity .5s ease-in-out;
+  -moz-transition: opacity .5s ease-in-out;
+  -o-transition: opacity .5s ease-in-out;
+  transition: opacity .5s ease-in-out;
+  text-align: center;
+}
+.poster:hover  p {
+  opacity: 1;
+}
+.poster p span {
+}
+
 body
 {
 	margin: 0;
 	padding: 0;
 	color: #555;
-	font: normal 10pt Arial,Helvetica,sans-serif;
+	font: normal 10pt "Segoe UI", Arial, Helvetica, sans-serif;
 	background: #EFEFEF;
 }
 
 #page
 {
-	margin-top: 5px;
-	margin-bottom: 5px;
+	margin-top: 15px;
+	margin-bottom: 30px;
 	background: white;
-	border: 1px solid #C9E0ED;
+	box-shadow: 0px 15px 40px rgba(50, 50, 50, 0.60);
 }
 
 #header
 {
 	margin: 0;
 	padding: 0;
-	border-top: 3px solid #C9E0ED;
+	border-top: 5px solid #33B5E5;
+}
+
+#header h1 {
+  font-size: 1.4em;
 }
 
 #content
@@ -38,7 +72,7 @@ body
 	margin: 10px 20px;
 	font-size: 0.8em;
 	text-align: center;
-	border-top: 1px solid #C9E0ED;
+	border-top: 1px solid #33B5E5;
 }
 
 #logo

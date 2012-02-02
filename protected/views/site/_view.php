@@ -8,11 +8,10 @@ $movie = json_decode($rtData);
 if ($movie === NULL) die('Error parsing json');
 ?>
 
-<div class="view">
+<div class="poster">
 <?php
 $text='<img src="' . $movie->posters->detailed . '" alt="' . $movie->title . ' Poster" />';
 echo CHtml::link($text, array('film/view', 'id'=>$data->film_id));
-echo CHtml::encode($data->title);
+echo '<p><span>' . $data->title . '</span></p>';
 ?>
-
 </div>

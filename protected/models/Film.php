@@ -42,6 +42,7 @@ class Film extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('rt_id, title, runtime', 'required'),
+            array('rt_id', 'unique'),
 			array('rating', 'numerical', 'integerOnly'=>true),
 			array('rt_id', 'length', 'max'=>10),
 			array('title, trailer', 'length', 'max'=>255),

@@ -13,8 +13,7 @@
  */
 class User extends CActiveRecord
 {
-	private $salt = '$2a$07$1234567890123456789099$';
-	
+	private $salt = '$2a$07$1968062480318304370756$';
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return User the static model class
@@ -41,9 +40,10 @@ class User extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('email, password', 'required'),
-			array('email', 'length', 'max'=>255),
+			array('email', 'length', 'min'=>6, 'max'=>255),
 			array('email', 'email'),
-			array('password', 'length', 'max'=>60),
+            array('email', 'unique'),
+			array('password', 'length', 'min'=>8, 'max'=>60),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('user_id, email', 'safe', 'on'=>'search'),

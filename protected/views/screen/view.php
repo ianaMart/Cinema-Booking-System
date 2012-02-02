@@ -20,5 +20,6 @@ $this->menu=array(
 	'attributes'=>array(
 		'screen_id',
 		'screen',
+		'seating_capacity',
 	),
 )); ?>
