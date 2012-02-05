@@ -23,7 +23,14 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'start_date'); ?>
-		<?php echo $form->textField($model,'start_date'); ?>
+		<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+            'model'=>$model,
+            'attribute'=>'start_date',
+            'options' => array(
+                'dateFormat'=>'yy-mm-dd',
+                'minDate'=>'0',)
+            ));
+        ?>
 		<?php echo $form->error($model,'start_date'); ?>
 	</div>
 
