@@ -3,8 +3,9 @@
 <head>
 	<meta charset="utf-8">
 
-    <link rel="stylesheet" href=""<?php echo Yii::app()->request->baseUrl; ?>/css/normalise.css" />
+    <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/reset.css" />
 	<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />
+    <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" media="screen, projection" />
 	<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/print.css" media="print" />
 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
@@ -22,13 +23,13 @@
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'Films', 'url'=>array('/film')),
-				array('label'=>'Screen', 'url'=>array('/screen'), 'visible'=>Yii::app()->user->name=='admin'),
-				array('label'=>'Showing', 'url'=>array('/showing')),
-				array('label'=>'Booking', 'url'=>array('/booking/create'), 'visible'=>!Yii::app()->user->isGuest),
-				array('label'=>'User', 'url'=>array('/user'), 'visible'=>Yii::app()->user->name=='admin'),
+				array('label'=>'Films', 'url'=>array('/film/index'), 'active'=>$this->id=='film'?true:false),
+				array('label'=>'Screen', 'url'=>array('/screen/index'), 'active'=>$this->id=='screen'?true:false, 'visible'=>Yii::app()->user->name=='admin'),
+				array('label'=>'Showing', 'url'=>array('/showing/index'), 'active'=>$this->id=='showing'?true:false),
+				array('label'=>'Booking', 'url'=>array('/booking/create'), 'active'=>$this->id=='booking'?true:false, 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'User', 'url'=>array('/user/index'), 'active'=>$this->id=='user'?true:false, 'visible'=>Yii::app()->user->name=='admin'),
 				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-				array('label'=>'Register', 'url'=>array('/user/create'), 'visible'=>Yii::app()->user->isGuest),
+				array('label'=>'Register', 'url'=>array('/user/create'), 'active'=>$this->id=='user'?true:false, 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
