@@ -44,7 +44,7 @@
 	<?php echo $content; ?>
 
 	<footer id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> by Amarjeet Rai.<br/>
+		&copy; <?php echo date('Y'); ?>, Amarjeet Rai.<br/>
 		All Rights Reserved.
 	</footer><!-- footer -->
 

@@ -4,8 +4,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Film', 'url'=>array('create')),
-	array('label'=>'Manage Film', 'url'=>array('admin')),
+	array('label'=>'Create Film', 'url'=>array('create'),'visible'=>Yii::app()->user->name=='admin'),
+	array('label'=>'Manage Film', 'url'=>array('admin'),'visible'=>Yii::app()->user->name=='admin'),
 );
 ?>
 

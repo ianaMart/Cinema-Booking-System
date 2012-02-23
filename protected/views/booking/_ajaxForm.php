@@ -33,7 +33,7 @@ $filmlist=CHtml::listData($film,'film_id','title'); ?>
 		<?php echo CHtml::dropDownList('no_of_seats_booked','', $help, array('ajax' => array('type'=>'POST','url'=>CController::createUrl('calculateTotalPrice'),'update'=>'#price'))); ?>
 	</div>
     
-    <div class="row">Seats available: <span id="available_seats"></span></div>
+    <div class="row">Seats available: <span id="available_seats">?</span></div>
     <div class="row">Total Price: £<span id="price">0</span></div>
 
 	<div class="row buttons">
