@@ -1,7 +1,8 @@
 body {
     color: #555;
     font: normal 10pt "Segoe UI", Arial, Helvetica, sans-serif;
-    background: #EFEFEF;
+    background-color: #EFEFEF;
+    background-image: url(../images/bg.jpg);
 }
 
 p,fieldset,table,pre {
@@ -43,11 +44,18 @@ h3 {
     
 }
 
+#login {
+    float: right;
+    position: relative;
+    top: 15px;
+    right: 10px;
+}
+
 #mainmenu ul {
 }
 
 
-#mainmenu ul li {
+#mainmenu ul li, #login ul li {
     display: inline;
     padding-right: 1em;
 }
