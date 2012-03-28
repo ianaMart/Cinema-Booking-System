@@ -27,7 +27,7 @@ class BookingController extends Controller
 	{
 		return array(
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','getDatesShowing','getTimesShowing','getSeatsAvailable','calculateTotalPrice','calculatePrice'),
+				'actions'=>array('create','getDatesShowing','getTimesShowing','getSeatsAvailable','calculateTotalPrice','calculatePrice','view'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -45,10 +45,14 @@ class BookingController extends Controller
 	 * @param integer $id the ID of the model to be displayed
 	 */
 	public function actionView($id)
-	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
-		));
+	{        
+        $data=Booking::model()->find('booking_id=:booking_id', array(':booking_id'=> $id));
+        if ($data->user_id == Yii::app()->user->getId() || Yii::app()->user->getName() == 'admin') {
+            $this->render('view',array(
+                'model'=>$this->loadModel($id),
+            ));
+        } else
+            throw new CHttpException(404,'The specified post cannot be found.');
 	}
 
 	/**

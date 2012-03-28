@@ -4,8 +4,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Screen', 'url'=>array('create')),
-	array('label'=>'Manage Screen', 'url'=>array('admin')),
+	array('label'=>'Create Screen', 'url'=>array('create'),'visible'=>Yii::app()->user->name=='admin'),
+	array('label'=>'Manage Screen', 'url'=>array('admin'),'visible'=>Yii::app()->user->name=='admin'),
 );
 ?>
 

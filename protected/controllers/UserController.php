@@ -63,14 +63,14 @@ class UserController extends Controller
 
 		if(isset($_POST['User']))
 		{
-			// Manual password length validation, find better fix.
+			// Manual password length validation, does not use Yii Framework, find fix
             if (strlen($_POST['User']['password']) >= 8)
             {
                 $model->email=$_POST['User']['email'];
                 $model->password=$model->hashPassword($_POST['User']['password']);
                 
                 if($model->save())
-                    $this->redirect(array('view','id'=>$model->user_id));
+                    $this->redirect(Controller::createUrl('site/login'));
             }
             else
             {

@@ -1,12 +1,14 @@
 <?php
-$this->breadcrumbs=array(
-	'Films',
-);
+if (Yii::app()->user->name=='admin') {
+    $this->breadcrumbs=array(
+        'Films',
+    );
 
-$this->menu=array(
-	array('label'=>'Create Film', 'url'=>array('create')),
-	array('label'=>'Manage Film', 'url'=>array('admin')),
-);
+    $this->menu=array(
+        array('label'=>'Create Film', 'url'=>array('create')),
+        array('label'=>'Manage Film', 'url'=>array('admin')),
+    );
+}
 ?>
 
 <h1>Films</h1>
@@ -14,4 +16,5 @@ $this->menu=array(
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
+    'template' => "{items}",
 )); ?>

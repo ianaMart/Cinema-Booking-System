@@ -1,12 +1,14 @@
 <?php
-$this->breadcrumbs=array(
-	'Showings',
-);
+if (Yii::app()->user->name=='admin') {
+    $this->breadcrumbs=array(
+        'Showings',
+    );
 
-$this->menu=array(
-	array('label'=>'Create Showing', 'url'=>array('create')),
-	array('label'=>'Manage Showing', 'url'=>array('admin')),
-);
+    $this->menu=array(
+        array('label'=>'Create Showing', 'url'=>array('create')),
+        array('label'=>'Manage Showing', 'url'=>array('admin')),
+    );
+}
 ?>
 
 <h1>Showings</h1>

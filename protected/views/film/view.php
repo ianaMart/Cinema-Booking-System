@@ -1,16 +1,18 @@
 <?php
-$this->breadcrumbs=array(
-	'Films'=>array('index'),
-	$model->title,
-);
+if (Yii::app()->user->name=='admin') {
+    $this->breadcrumbs=array(
+        'Films'=>array('index'),
+        $model->title,
+    );
 
-$this->menu=array(
-	array('label'=>'List Film', 'url'=>array('index')),
-	array('label'=>'Create Film', 'url'=>array('create')),
-	array('label'=>'Update Film', 'url'=>array('update', 'id'=>$model->film_id)),
-	array('label'=>'Delete Film', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->film_id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Film', 'url'=>array('admin')),
-);
+    $this->menu=array(
+        array('label'=>'List Film', 'url'=>array('index')),
+        array('label'=>'Create Film', 'url'=>array('create')),
+        array('label'=>'Update Film', 'url'=>array('update', 'id'=>$model->film_id)),
+        array('label'=>'Delete Film', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->film_id),'confirm'=>'Are you sure you want to delete this item?')),
+        array('label'=>'Manage Film', 'url'=>array('admin')),
+    );
+}
 ?>
 
 <h1><?php echo $model->title; ?></h1>

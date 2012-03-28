@@ -1,28 +1,17 @@
-<div class="view">
+<?php
+$endpoint = 'http://api.rottentomatoes.com/api/public/v1.0/movies/' . $data->rt_id . '.json?apikey=' . Yii::app()->params['rtApiKey'];
+$session = curl_init($endpoint);
+curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
+$rtData = curl_exec($session);
+curl_close($session);
+$movie = json_decode($rtData);
+if ($movie === NULL) die('Error parsing json');
+?>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('film_id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->film_id), array('view', 'id'=>$data->film_id)); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('rt_id')); ?>:</b>
-	<?php echo CHtml::encode($data->rt_id); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('title')); ?>:</b>
-	<?php echo CHtml::encode($data->title); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('runtime')); ?>:</b>
-	<?php echo CHtml::encode($data->runtime); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('rating')); ?>:</b>
-	<?php echo CHtml::encode($data->rating); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('trailer')); ?>:</b>
-	<?php echo CHtml::encode($data->trailer); ?>
-	<br />
-
-
+<div class="poster">
+<?php
+$text='<img src="' . $movie->posters->detailed . '" alt="' . $movie->title . ' Poster" />';
+echo CHtml::link($text, array('film/view', 'id'=>$data->film_id));
+echo '<p><span>' . $data->title . '</span></p>';
+?>
 </div>
