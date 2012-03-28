@@ -1,16 +1,18 @@
 <?php
-$this->breadcrumbs=array(
-	'Bookings'=>array('index'),
-	$model->booking_id,
-);
+if (Yii::app()->user->name=='admin') {
+    $this->breadcrumbs=array(
+        'Bookings'=>array('index'),
+        $model->booking_id,
+    );
 
-$this->menu=array(
-	array('label'=>'List Booking', 'url'=>array('index')),
-	array('label'=>'Create Booking', 'url'=>array('create')),
-	array('label'=>'Update Booking', 'url'=>array('update', 'id'=>$model->booking_id)),
-	array('label'=>'Delete Booking', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->booking_id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Booking', 'url'=>array('admin')),
-);
+    $this->menu=array(
+        array('label'=>'List Booking', 'url'=>array('index')),
+        array('label'=>'Create Booking', 'url'=>array('create')),
+        array('label'=>'Update Booking', 'url'=>array('update', 'id'=>$model->booking_id)),
+        array('label'=>'Delete Booking', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->booking_id),'confirm'=>'Are you sure you want to delete this item?')),
+        array('label'=>'Manage Booking', 'url'=>array('admin')),
+    );
+}
 ?>
 
 <h1>View Booking #<?php echo $model->booking_id; ?></h1>

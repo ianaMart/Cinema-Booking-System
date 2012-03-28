@@ -13,7 +13,7 @@
 
 <body>
 
-<div class="container" id="page">
+<div id="page">
 
 	<header id="header">
         <div id="login">
@@ -33,11 +33,12 @@
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
 				array('label'=>'Films', 'url'=>array('/film/index'), 'active'=>$this->id=='film'?true:false),
-				array('label'=>'Screen', 'url'=>array('/screen/index'), 'active'=>$this->id=='screen'?true:false, 'visible'=>Yii::app()->user->name=='admin'),
-				array('label'=>'Showing', 'url'=>array('/showing/index'), 'active'=>$this->id=='showing'?true:false),
+				array('label'=>'Showings', 'url'=>array('/showing/index'), 'active'=>$this->id=='showing'?true:false),
 				array('label'=>'Booking', 'url'=>array('/booking/create'), 'active'=>$this->id=='booking'?true:false, 'visible'=>!Yii::app()->user->isGuest),
-				array('label'=>'User', 'url'=>array('/user/index'), 'active'=>$this->id=='user'?true:false, 'visible'=>Yii::app()->user->name=='admin'),
+				array('label'=>'User', 'url'=>array('/user/index'), 'active'=>$this->id=='user'?true:false, 'visible'=>Yii::app()->user->name=='admin'),                
+				array('label'=>'Screen', 'url'=>array('/screen/index'), 'active'=>$this->id=='screen'?true:false, 'visible'=>Yii::app()->user->name=='admin'),
 				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
+                array('label'=>'Contact', 'url'=>array('/site/page', 'view'=>'contact')),
 			),
 		)); ?>
 	</nav><!-- mainmenu -->

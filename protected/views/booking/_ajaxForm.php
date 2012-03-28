@@ -26,7 +26,7 @@ $filmlist=CHtml::listData($film,'film_id','title'); ?>
         
     <div class="row">
       <?php
-      $help[0] = 'Seats required?';
+      $help[0] = 'Number of seats?';
       for ($i = 1; $i <= 9; $i++) {
         $help[$i] = $i;}
       ?>

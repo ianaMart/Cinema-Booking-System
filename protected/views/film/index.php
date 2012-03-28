@@ -1,12 +1,14 @@
 <?php
-$this->breadcrumbs=array(
-	'Films',
-);
+if (Yii::app()->user->name=='admin') {
+    $this->breadcrumbs=array(
+        'Films',
+    );
 
-$this->menu=array(
-	array('label'=>'Create Film', 'url'=>array('create'),'visible'=>Yii::app()->user->name=='admin'),
-	array('label'=>'Manage Film', 'url'=>array('admin'),'visible'=>Yii::app()->user->name=='admin'),
-);
+    $this->menu=array(
+        array('label'=>'Create Film', 'url'=>array('create')),
+        array('label'=>'Manage Film', 'url'=>array('admin')),
+    );
+}
 ?>
 
 <h1>Films</h1>
