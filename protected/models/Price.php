@@ -64,8 +64,8 @@ class Price extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'price_id' => 'Price',
-			'price' => 'Price',
+			'price_id' => 'Price (£)',
+			'price' => 'Price (£)',
 		);
 	}
 

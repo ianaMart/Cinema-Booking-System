@@ -5,7 +5,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('film_id')); ?>:</b>
-	<?php echo CHtml::encode($data->film_id); ?>
+	<?php echo CHtml::encode($data->film->title); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('screen_id')); ?>:</b>
@@ -21,7 +21,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('price_id')); ?>:</b>
-	<?php echo CHtml::encode($data->price_id); ?>
+	<?php echo CHtml::encode($data->price->price); ?>
 	<br />
 
 

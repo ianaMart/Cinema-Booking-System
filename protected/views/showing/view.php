@@ -21,10 +21,10 @@ if (Yii::app()->user->name=='admin') {
 	'data'=>$model,
 	'attributes'=>array(
 		'showing_id',
-		'film_id',
-		'screen_id',
+		'film.title',
+		'screen.screen',
 		'start_date',
 		'start_time',
-		'price_id',
+		'price.price',
 	),
 )); ?>

@@ -1,13 +1,15 @@
 <?php
-$this->breadcrumbs=array(
-	'Users'=>array('index'),
-	'Create',
-);
+if (Yii::app()->user->name=='admin') {
+    $this->breadcrumbs=array(
+        'Users'=>array('index'),
+        'Create',
+    );
 
-$this->menu=array(
-	array('label'=>'List User', 'url'=>array('index'),'visible'=>Yii::app()->user->name=='admin'),
-	array('label'=>'Manage User', 'url'=>array('admin'),'visible'=>Yii::app()->user->name=='admin'),
-);
+    $this->menu=array(
+        array('label'=>'List User', 'url'=>array('index')),
+        array('label'=>'Manage User', 'url'=>array('admin')),
+    );
+}
 ?>
 
 <h1>Create User</h1>

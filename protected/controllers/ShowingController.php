@@ -123,7 +123,21 @@ class ShowingController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Showing');
+        $date=date("Y-m-d");
+        $newdate = strtotime('-100 week', strtotime($date));
+        $newdate = date('Y-m-j', $newdate);
+
+		$dataProvider=new CActiveDataProvider('Showing', array(
+            'criteria'=>array(
+                'condition'=>'start_date BETWEEN :newdate AND :date',
+                'params'=>array(':date'=>$date, ':newdate'=>$newdate),
+                'order'=>'start_date ASC',
+            ),
+            'pagination'=>array(
+                'pageSize'=>10,
+            ),
+        ));
+        
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
