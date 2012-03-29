@@ -58,7 +58,9 @@ foreach ($movie->abridged_cast as $cast) {
 }
 echo '</li></ul>';
 echo '</ul>';
-echo '<iframe width="560" height="315" src="http://www.youtube.com/embed/' . $model->trailer . '" frameborder="0" allowfullscreen></iframe>'
+if ($model->trailer != null) {
+    echo '<iframe width="560" height="315" src="http://www.youtube.com/embed/' . $model->trailer . '" frameborder="0" allowfullscreen></iframe>';
+}
 ?>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
