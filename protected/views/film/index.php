@@ -9,6 +9,9 @@ if (Yii::app()->user->name=='admin') {
         array('label'=>'Manage Film', 'url'=>array('admin')),
     );
 }
+if (Yii::app()->user->name != 'admin') {    
+    $this->layout='//layouts/column1';
+}
 ?>
 
 <h1>Films</h1>
@@ -16,5 +19,7 @@ if (Yii::app()->user->name=='admin') {
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
-    'template' => "{items}",
-)); ?>
+    'template' => "{sorter} {items} {pager}",    
+    'enableSorting'=>true,
+    'sortableAttributes'=>array('title','year','runtime'),
+    )); ?>

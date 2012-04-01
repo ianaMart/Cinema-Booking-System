@@ -23,9 +23,6 @@
 		<?php echo $form->labelEx($model,'password'); ?>
 		<?php echo $form->passwordField($model,'password'); ?>
 		<?php echo $form->error($model,'password'); ?>
-		<p class="hint">
-			Hint: You may login with <tt>user1@gmail.com/user1</tt> or <tt>admin/admin</tt>.
-		</p>
 	</div>
 
 	<div class="row rememberMe">

@@ -42,7 +42,7 @@ class Film extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('rt_id, title, year, runtime', 'required'),
+			array('rt_id, title, year', 'required'),
 			array('rt_id', 'length', 'max'=>10),
 			array('title, trailer', 'length', 'max'=>255),
 			array('year', 'length', 'max'=>4),

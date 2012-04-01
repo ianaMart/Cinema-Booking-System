@@ -68,10 +68,15 @@ class FilmController extends Controller
 		if(isset($_POST['Film']))
 		{
 			$model->attributes=$_POST['Film'];
+                        
+            $rp = new rotten_potatoes(array("API_KEY" => Yii::app()->params['rtApiKey']));
+            $movie = $rp->get_movie($_POST['Film']['rt_id']);
+            
+            $model->title=$movie->title;
+            $model->year=$movie->year;
+            $model->runtime=$movie->runtime;
+            
 			if($model->save()) {
-                $rp = new rotten_potatoes(array("API_KEY" => Yii::app()->params['rtApiKey']));
-                $movie = $rp->get_movie($_POST['Film']['rt_id']);
-                
                 $image = new GetImage;
                 $image->source = $movie->posters['detailed'];
                 $image->save_to = 'images/posters/';
@@ -167,8 +172,12 @@ class FilmController extends Controller
             die('Error parsing json');
         } else {
             echo '<ul>';
-            for($i=0; $i < count($movie->movies); $i++) {
-                echo '<li>' . $movie->movies[$i]->id . ' ' . $movie->movies[$i]->title . ' ' . $movie->movies[$i]->year . '</li>';
+            for ($i = 0; $i < count($movie->movies); $i++) {
+                echo '<li><strong>'
+                . $movie->movies[$i]->id . '</strong> ' 
+                . $movie->movies[$i]->title . ' ('
+                . $movie->movies[$i]->year
+                . ')</li>';
             }
             echo '</ul>';
         }

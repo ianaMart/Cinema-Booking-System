@@ -13,11 +13,10 @@ if (Yii::app()->user->name=='admin') {
 		array('label'=>'Manage Film', 'url'=>array('admin')),
 	);
 }
-?>
+if (Yii::app()->user->name != 'admin') {    
+    $this->layout='//layouts/column1';
+}
 
-<h1><?php echo $model->title; ?></h1>
-
-<?php
 $apikey = Yii::app()->params['rtApiKey'];
 $query = urlencode($model->title); // make sure to url encode an query parameters
 
@@ -39,9 +38,16 @@ curl_close($session);
 // decode the json data to make it easier to parse the php
 $movie = json_decode($data);
 if ($movie === NULL) die('Error parsing json');
+?>
 
-// play with the data!
-echo '<img src="../../images/posters/' . $model->film_id . '.jpg" alt="' . $model->title . ' Poster" />';
+<h1><?php echo $model->title; ?></h1>
+
+<div id="poster">
+<?php echo '<img src="' . Yii::app()->getBaseUrl() . '/images/posters/' . $model->film_id . '.jpg" alt="' . $model->title . ' Poster" />'; ?>
+</div>
+
+<div id="filminfo">
+<?php
 echo '<ul>';
 echo '<li><b>Title:</b> ' . $movie->title . '</li>';
 echo '<li><b>Year:</b> ' . $movie->year . '</li>';
@@ -58,10 +64,13 @@ foreach ($movie->abridged_cast as $cast) {
 }
 echo '</li></ul>';
 echo '</ul>';
+
 if ($model->trailer != null) {
+    echo '<h2>Trailer</h2>';
     echo '<iframe width="560" height="315" src="http://www.youtube.com/embed/' . $model->trailer . '" frameborder="0" allowfullscreen></iframe>';
 }
 ?>
+</div>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

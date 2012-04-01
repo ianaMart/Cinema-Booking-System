@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 
     <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/reset.css" />
+    <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" media="screen, projection" />
 	<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />
     <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" media="screen, projection" />
 	<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/print.css" media="print" />
@@ -19,8 +20,8 @@
         <div id="login">
             <?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
-				array('label'=>'Register', 'url'=>array('/user/create'), 'active'=>$this->id=='user'?true:false, 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+				array('label'=>'Register', 'url'=>array('/user/create'), 'active'=>$this->id=='user'?true:false, 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
 			),
 		)); ?>
@@ -31,7 +32,7 @@
 	<nav id="mainmenu">
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
+				array('label'=>'Home', 'url'=>array('/')),
 				array('label'=>'Films', 'url'=>array('/film/index'), 'active'=>$this->id=='film'?true:false),
 				array('label'=>'Showings', 'url'=>array('/showing/index'), 'active'=>$this->id=='showing'?true:false),
 				array('label'=>'Booking', 'url'=>array('/booking/create'), 'active'=>$this->id=='booking'?true:false, 'visible'=>!Yii::app()->user->isGuest),
