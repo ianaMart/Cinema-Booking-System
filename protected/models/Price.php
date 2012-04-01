@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "tbl_price".
+ * This is the model class for table "{{price}}".
  *
- * The followings are the available columns in table 'tbl_price':
+ * The followings are the available columns in table '{{price}}':
  * @property string $price_id
  * @property string $price
  *
@@ -14,6 +14,7 @@ class Price extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
+	 * @param string $className active record class name.
 	 * @return Price the static model class
 	 */
 	public static function model($className=__CLASS__)
@@ -26,7 +27,7 @@ class Price extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'tbl_price';
+		return '{{price}}';
 	}
 
 	/**
@@ -64,8 +65,8 @@ class Price extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'price_id' => 'Price (£)',
-			'price' => 'Price (£)',
+			'price_id' => 'Price (&pound)',
+			'price' => 'Price (&pound)',
 		);
 	}
 

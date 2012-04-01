@@ -1,14 +1,14 @@
 <?php
 
 /**
- * This is the model class for table "tbl_film".
+ * This is the model class for table "{{film}}".
  *
- * The followings are the available columns in table 'tbl_film':
+ * The followings are the available columns in table '{{film}}':
  * @property string $film_id
  * @property string $rt_id
  * @property string $title
+ * @property string $year
  * @property string $runtime
- * @property integer $rating
  * @property string $trailer
  *
  * The followings are the available model relations:
@@ -18,6 +18,7 @@ class Film extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
+	 * @param string $className active record class name.
 	 * @return Film the static model class
 	 */
 	public static function model($className=__CLASS__)
@@ -30,7 +31,7 @@ class Film extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'tbl_film';
+		return '{{film}}';
 	}
 
 	/**
@@ -41,15 +42,14 @@ class Film extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('rt_id, title, runtime', 'required'),
-            array('rt_id', 'unique'),
-			array('rating', 'numerical', 'integerOnly'=>true),
+			array('rt_id, title, year, runtime', 'required'),
 			array('rt_id', 'length', 'max'=>10),
 			array('title, trailer', 'length', 'max'=>255),
-			array('runtime', 'type', 'type'=>'time', 'timeFormat'=>'hh:mm'),
+			array('year', 'length', 'max'=>4),
+			array('runtime', 'length', 'max'=>3),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('film_id, rt_id, title, runtime, rating', 'safe', 'on'=>'search'),
+			array('film_id, rt_id, title, year, runtime, trailer', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -74,8 +74,8 @@ class Film extends CActiveRecord
 			'film_id' => 'Film',
 			'rt_id' => 'Rt',
 			'title' => 'Title',
+			'year' => 'Year',
 			'runtime' => 'Runtime',
-			'rating' => 'Rating',
 			'trailer' => 'Trailer',
 		);
 	}
@@ -94,8 +94,8 @@ class Film extends CActiveRecord
 		$criteria->compare('film_id',$this->film_id,true);
 		$criteria->compare('rt_id',$this->rt_id,true);
 		$criteria->compare('title',$this->title,true);
+		$criteria->compare('year',$this->year,true);
 		$criteria->compare('runtime',$this->runtime,true);
-		$criteria->compare('rating',$this->rating);
 		$criteria->compare('trailer',$this->trailer,true);
 
 		return new CActiveDataProvider($this, array(

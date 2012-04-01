@@ -45,9 +45,11 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'film_id',
 		'rt_id',
 		'title',
+		'year',
 		'runtime',
-		'rating',
+		/*
 		'trailer',
+		*/
 		array(
 			'class'=>'CButtonColumn',
 		),

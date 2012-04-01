@@ -21,13 +21,13 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'runtime'); ?>
-		<?php echo $form->textField($model,'runtime'); ?>
+		<?php echo $form->label($model,'year'); ?>
+		<?php echo $form->textField($model,'year',array('size'=>4,'maxlength'=>4)); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'rating'); ?>
-		<?php echo $form->textField($model,'rating'); ?>
+		<?php echo $form->label($model,'runtime'); ?>
+		<?php echo $form->textField($model,'runtime',array('size'=>3,'maxlength'=>3)); ?>
 	</div>
 
 	<div class="row">

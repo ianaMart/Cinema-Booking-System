@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "tbl_screen".
+ * This is the model class for table "{{screen}}".
  *
- * The followings are the available columns in table 'tbl_screen':
+ * The followings are the available columns in table '{{screen}}':
  * @property string $screen_id
  * @property string $screen
  * @property string $seating_capacity
@@ -28,7 +28,7 @@ class Screen extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'tbl_screen';
+		return '{{screen}}';
 	}
 
 	/**

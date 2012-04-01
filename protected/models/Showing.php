@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "tbl_showing".
+ * This is the model class for table "{{showing}}".
  *
- * The followings are the available columns in table 'tbl_showing':
+ * The followings are the available columns in table '{{showing}}':
  * @property string $showing_id
  * @property string $film_id
  * @property string $screen_id
@@ -21,6 +21,7 @@ class Showing extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
+	 * @param string $className active record class name.
 	 * @return Showing the static model class
 	 */
 	public static function model($className=__CLASS__)
@@ -33,7 +34,7 @@ class Showing extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'tbl_showing';
+		return '{{showing}}';
 	}
 
 	/**

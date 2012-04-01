@@ -1,4 +1,7 @@
 <?php
+Yii::import('application.vendors.*');
+require_once('class.rotten_potatoes.php');
+require_once('class.get.image.php');
 
 class FilmController extends Controller
 {
@@ -65,8 +68,18 @@ class FilmController extends Controller
 		if(isset($_POST['Film']))
 		{
 			$model->attributes=$_POST['Film'];
-			if($model->save())
+			if($model->save()) {
+                $rp = new rotten_potatoes(array("API_KEY" => Yii::app()->params['rtApiKey']));
+                $movie = $rp->get_movie($_POST['Film']['rt_id']);
+                
+                $image = new GetImage;
+                $image->source = $movie->posters['detailed'];
+                $image->save_to = 'images/posters/';
+                $image->filename = $model->film_id;
+                $image->download();
+
 				$this->redirect(array('view','id'=>$model->film_id));
+            }
 		}
 
 		$this->render('create',array(
@@ -89,8 +102,19 @@ class FilmController extends Controller
 		if(isset($_POST['Film']))
 		{
 			$model->attributes=$_POST['Film'];
-			if($model->save())
+			if($model->save()) {
+                $rp = new rotten_potatoes(array("API_KEY" => Yii::app()->params['rtApiKey']));
+                $movie = $rp->get_movie($_POST['Film']['rt_id']);
+                
+                $image = new GetImage;
+                $image->source = $movie->posters['detailed'];
+                $image->save_to = 'images/posters/';
+                $image->filename = $model->film_id;
+                $image->download();
+                
 				$this->redirect(array('view','id'=>$model->film_id));
+            }
+            
 		}
 
 		$this->render('update',array(

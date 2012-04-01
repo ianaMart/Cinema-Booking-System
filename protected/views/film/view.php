@@ -1,17 +1,17 @@
 <?php
 if (Yii::app()->user->name=='admin') {
-    $this->breadcrumbs=array(
-        'Films'=>array('index'),
-        $model->title,
-    );
+	$this->breadcrumbs=array(
+		'Films'=>array('index'),
+		$model->title,
+	);
 
-    $this->menu=array(
-        array('label'=>'List Film', 'url'=>array('index')),
-        array('label'=>'Create Film', 'url'=>array('create')),
-        array('label'=>'Update Film', 'url'=>array('update', 'id'=>$model->film_id)),
-        array('label'=>'Delete Film', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->film_id),'confirm'=>'Are you sure you want to delete this item?')),
-        array('label'=>'Manage Film', 'url'=>array('admin')),
-    );
+	$this->menu=array(
+		array('label'=>'List Film', 'url'=>array('index')),
+		array('label'=>'Create Film', 'url'=>array('create')),
+		array('label'=>'Update Film', 'url'=>array('update', 'id'=>$model->film_id)),
+		array('label'=>'Delete Film', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->film_id),'confirm'=>'Are you sure you want to delete this item?')),
+		array('label'=>'Manage Film', 'url'=>array('admin')),
+	);
 }
 ?>
 
@@ -41,7 +41,7 @@ $movie = json_decode($data);
 if ($movie === NULL) die('Error parsing json');
 
 // play with the data!
-echo '<img src="' . $movie->posters->detailed . '" alt="Poster" />';
+echo '<img src="../../images/posters/' . $model->film_id . '.jpg" alt="' . $model->title . ' Poster" />';
 echo '<ul>';
 echo '<li><b>Title:</b> ' . $movie->title . '</li>';
 echo '<li><b>Year:</b> ' . $movie->year . '</li>';
@@ -69,8 +69,8 @@ if ($model->trailer != null) {
 		'film_id',
 		'rt_id',
 		'title',
+		'year',
 		'runtime',
-		'rating',
 		'trailer',
 	),
 )); ?>

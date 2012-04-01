@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "tbl_user".
+ * This is the model class for table "{{user}}".
  *
- * The followings are the available columns in table 'tbl_user':
+ * The followings are the available columns in table '{{user}}':
  * @property string $user_id
  * @property string $email
  * @property string $password
@@ -16,6 +16,7 @@ class User extends CActiveRecord
 	private $salt = '$2a$07$1968062480318304370756$';
 	/**
 	 * Returns the static model of the specified AR class.
+	 * @param string $className active record class name.
 	 * @return User the static model class
 	 */
 	public static function model($className=__CLASS__)
@@ -28,7 +29,7 @@ class User extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'tbl_user';
+		return '{{user}}';
 	}
 
 	/**
@@ -42,7 +43,7 @@ class User extends CActiveRecord
 			array('email, password', 'required'),
 			array('email', 'length', 'min'=>6, 'max'=>255),
 			array('email', 'email'),
-            array('email', 'unique'),
+			array('email', 'unique'),
 			array('password', 'length', 'min'=>8, 'max'=>60),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -94,12 +95,12 @@ class User extends CActiveRecord
 	}
 	
 	public function validatePassword($password)
-    {
-        return $this->hashPassword($password)===$this->password;
-    }
- 
-    public function hashPassword($password)
-    {
-        return crypt($password, $this->salt);
-    }
+	{
+		return $this->hashPassword($password)===$this->password;
+	}
+	
+	public function hashPassword($password)
+	{
+		return crypt($password, $this->salt);
+	}
 }
