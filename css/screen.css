@@ -93,25 +93,24 @@ h2 {font-size:1.5em;}
 .poster {
     position: relative;
     display: inline;
-    margin: 5px 0 10px 0;
+    
 }
 .poster p {
-    margin:0;
-    padding: 15px 0 50px 0;
-    margin-bottom: 5px;
+    margin: 0 0 3px;
+    width: 100%;
+    padding: 15px 0 40px;
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 100%;
     font-size: 1.4em;
     font-weight: bold;
     color: #fff;
     background-color: rgba(0,0,0,0.7);
     opacity: 0;
-    -webkit-transition: opacity .5s ease-in-out;
-    -moz-transition: opacity .5s ease-in-out;
-    -o-transition: opacity .5s ease-in-out;
-    transition: opacity .5s ease-in-out;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
     text-align: center;
 }
 .poster:hover  p {
@@ -119,7 +118,6 @@ h2 {font-size:1.5em;}
 }
 
 #poster {
-    float: left;
 }
 
 #filminfo {

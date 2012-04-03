@@ -32,7 +32,7 @@
 	<nav id="mainmenu">
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/')),
+				array('label'=>'Home', 'url'=>array('/site/index')),
 				array('label'=>'Films', 'url'=>array('/film/index'), 'active'=>$this->id=='film'?true:false),
 				array('label'=>'Showings', 'url'=>array('/showing/index'), 'active'=>$this->id=='showing'?true:false),
 				array('label'=>'Booking', 'url'=>array('/booking/create'), 'active'=>$this->id=='booking'?true:false, 'visible'=>!Yii::app()->user->isGuest),
