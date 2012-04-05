@@ -15,7 +15,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->clientScript->getCoreScrip
     
     <script>
     $(document).ready(function() {
-        $('input[type=text], textarea').each(function() {
+        $('#search').each(function() {
             $(this).focus(function() {if($(this).val() == this.defaultValue)
                     $(this).val("");
             });
