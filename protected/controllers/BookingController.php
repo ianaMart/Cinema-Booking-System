@@ -64,13 +64,19 @@ class BookingController extends Controller
 		$model=new Booking;
 
 		if(isset($_POST['showing_id']))
-		{            
-			$model->user_id=Yii::app()->user->getId();
-			$model->showing_id=$_POST['showing_id'];
-            $model->no_of_seats_booked=$_POST['no_of_seats_booked'];
-            $model->total_price=(BookingController::actionCalculatePrice($_POST['showing_id']) * $_POST['no_of_seats_booked']);
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->booking_id));
+		{
+            $no_of_seats_available = $this->actionGetNoOfSeatsAvailable($_POST['showing_id']);
+            
+            if ($no_of_seats_available > 0) {
+                $model->user_id=Yii::app()->user->getId();
+                $model->showing_id=$_POST['showing_id'];
+                $model->no_of_seats_booked=$_POST['no_of_seats_booked'];
+                $model->total_price=(BookingController::actionCalculatePrice($_POST['showing_id']) * $_POST['no_of_seats_booked']);
+                if($model->save())
+                    $this->redirect(array('view','id'=>$model->booking_id));
+            }
+            else
+                throw new CHttpException(400,'Showing has no seats available. Sold out.');
 		}
 
 		$this->render('create',array(
@@ -117,25 +123,25 @@ class BookingController extends Controller
     
     public function actionGetSeatsAvailable()
 	{
-        $connection=Yii::app()->db;
-        $sql='SELECT (seating_capacity - sum(no_of_seats_booked)) AS "Seats Available",
-              seating_capacity AS "Seating Capacity"
-              FROM {{showing}} AS h
-              INNER JOIN {{booking}} AS b
-              ON h.showing_id = b.showing_id
-              INNER JOIN {{screen}} AS c
-              ON h.screen_id = c.screen_id
-              WHERE h.showing_id = :showing;';
+        $no_of_seats_available = $this->actionGetNoOfSeatsAvailable($_POST['showing_id']);
         
-        $command=$connection->createCommand($sql);
-        $showing_id=$_POST['showing_id'];
-        $command->bindParam(":showing",$showing_id,PDO::PARAM_STR);
-        $row=$command->queryRow();
+        if ($no_of_seats_available == 0) {
+            echo 'No seats available';
+        }
+        else if ($no_of_seats_available > 0) {
+            $no_of_seats = array();
+            $no_of_seats[] = 'Number of seats?';
+            
+            for ($i = 1; $i <= $no_of_seats_available && $i <= 9; $i++) {
+                $no_of_seats[] = $i;
+            }
+            
+            echo CHtml::dropDownList('no_of_seats_booked','', $no_of_seats, array('ajax' => array('type'=>'POST','url'=>CController::createUrl('calculateTotalPrice'),'update'=>'#price')));
+        }
+        else {
+            echo 'Error';
+        }
         
-        if ($row['Seats Available']==null)
-            echo $row['Seating Capacity'];
-        else
-            echo $row['Seats Available'];
 	}
     
     public function actionCalculateTotalPrice()
@@ -159,6 +165,25 @@ class BookingController extends Controller
         else
             echo 'Error';
     }
+    
+    public function actionGetNoOfSeatsAvailable($showing_id)
+	{
+        $connection=Yii::app()->db;
+        $sql='SELECT (seating_capacity - (IFNULL(SUM(no_of_seats_booked),0))) AS "Seats Available",
+                     seating_capacity AS "Seating Capacity"
+              FROM {{showing}} AS h
+              INNER JOIN {{booking}} AS b
+              ON h.showing_id = b.showing_id
+              INNER JOIN {{screen}} AS c
+              ON h.screen_id = c.screen_id
+              WHERE h.showing_id = :showing;';
+        
+        $command=$connection->createCommand($sql);
+        $command->bindParam(":showing",$showing_id,PDO::PARAM_STR);
+        $row=$command->queryRow();
+        
+        return $row['Seats Available'];    
+	}
     
     public static function actionCalculatePrice($showing_id)
     {

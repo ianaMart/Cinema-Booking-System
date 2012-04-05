@@ -21,19 +21,13 @@ $filmlist=CHtml::listData($film,'film_id','title'); ?>
 	</div>
     
     <div class="row">
-		<?php echo CHtml::dropDownList('showing_id','', array(), array('ajax' => array('type'=>'POST','url'=>CController::createUrl('getSeatsAvailable'),'update'=>'#available_seats'))); ?>
-	</div>
-        
-    <div class="row">
-      <?php
-      $help[0] = 'Number of seats?';
-      for ($i = 1; $i <= 9; $i++) {
-        $help[$i] = $i;}
-      ?>
-		<?php echo CHtml::dropDownList('no_of_seats_booked','', $help, array('ajax' => array('type'=>'POST','url'=>CController::createUrl('calculateTotalPrice'),'update'=>'#price'))); ?>
+		<?php echo CHtml::dropDownList('showing_id','', array(), array('ajax' => array('type'=>'POST','url'=>CController::createUrl('getSeatsAvailable'),'update'=>'#no_of_seats_booked'))); ?>
 	</div>
     
-    <div class="row">Seats available: <span id="available_seats">?</span></div>
+    <div class="row">
+        <?php echo CHtml::dropDownList('no_of_seats_booked','', array(), array('ajax' => array('type'=>'POST','url'=>CController::createUrl('calculateTotalPrice'),'update'=>'#price'))); ?>
+    </div>
+    
     <div class="row">Total Price: £<span id="price">0</span></div>
 
 	<div class="row buttons">

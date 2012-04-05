@@ -46,8 +46,9 @@ h2 {font-size:1.5em;}
     padding: 0 !important;
 }
 
-#mainmenu {
+#mainmenu, #fsearch {
     margin: 10px 0;
+    padding-right: 0;
 }
 
 #mainmenu ul {
@@ -56,7 +57,7 @@ h2 {font-size:1.5em;}
 }
 
 
-#mainmenu ul li, #login ul li {
+#mainmenu ul li, #login ul li, #altnav ul li {
     display: inline;
     padding-right: 1em;
 }
@@ -67,7 +68,6 @@ h2 {font-size:1.5em;}
 
 #mainmenu li.active a:hover {
     color: #444;
-    text-decoration: none;
      
 }
 
@@ -79,15 +79,53 @@ h2 {font-size:1.5em;}
 }
 
 #mainmenu a:hover {
-    color: #333;
+    color: #0099FF;
     text-decoration: underline;
 }
 
+#altnav ul {
+    margin-right: 0;
+}
+
+#altnav a {
+    color: #999;
+    font-size: 1.5em;
+    border-top: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+#altnav a:hover {
+    color: #0099FF;
+    border-top:2px solid #0099FF;
+}
+
+#altnav li.active a {
+    color: #444;
+    border-top:2px solid black;
+}
+
+#fsearch {}
+
+#fsearch input {
+    background: url(../images/search.png) no-repeat 10px 6px;
+    width: 120px;
+    border: 2px solid lightgray;
+    font-size: 12px;
+    padding: 6px 15px 6px 30px;
+    outline: none;
+    border-radius: 20px;
+}
+
+#fsearch input:focus {
+    border: 2px solid #0099FF;
+}
+
 #footer {
-    padding: 10px 20px;
+    padding: 15px 0 5px;
     font-size: 1em;
     text-align: center;
-    border-top: 1px solid #33B5E5;
+/*    border-top: 1px solid #33B5E5;*/
 }
 
 .poster {
@@ -118,6 +156,7 @@ h2 {font-size:1.5em;}
 }
 
 #poster {
+    float: left;
 }
 
 #filminfo {
@@ -128,6 +167,10 @@ h2 {font-size:1.5em;}
 #filminfo > ul {
     list-style-type: none;
     padding-left: 0; 
+}
+
+#filminfo ul > li {
+    padding-bottom: 8px;
 }
 
 div.flash-error, div.flash-notice, div.flash-success

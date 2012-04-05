@@ -30,7 +30,7 @@ class FilmController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','search'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow admin user to perform all other actions
@@ -49,7 +49,32 @@ class FilmController extends Controller
 	 */
 	public function actionView($id)
 	{
+        $model = $this->loadModel($id);
+        $apikey = Yii::app()->params['rtApiKey'];
+        $query = urlencode($model->title); // make sure to url encode an query parameters
+        // construct the query with our apikey and the query we want to make
+        $endpoint = 'http://api.rottentomatoes.com/api/public/v1.0/movies/' . $model->rt_id . '.json?apikey=' . $apikey;
+
+        // setup curl to make a call to the endpoint
+        $session = curl_init($endpoint);
+
+        // indicates that we want the response back
+        curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
+
+        // exec curl and get the data back
+        $data = curl_exec($session);
+
+        // remember to close the curl session once we are finished retrieveing the data
+        curl_close($session);
+
+        // decode the json data to make it easier to parse the php
+        $movie = json_decode($data);
+        
+        if ($movie === NULL)
+            die('Error parsing json');
+        
 		$this->render('view',array(
+            'movie'=>$movie,
 			'model'=>$this->loadModel($id),
 		));
 	}
@@ -182,6 +207,27 @@ class FilmController extends Controller
             echo '</ul>';
         }
 	}
+    
+    public function actionSearch()
+	{
+        if (isset($_GET['term'])) {            
+            $qtxt = "SELECT title, film_id FROM {{film}} WHERE title LIKE :film";
+            $command = Yii::app()->db->createCommand($qtxt);
+            $command->bindValue(":film", '%'.$_GET['term'].'%', PDO::PARAM_STR);
+            $res = $command->queryAll();
+            
+            $result = array();
+            foreach ($res as $m) {
+	            $result[] = array(
+	                'label' => $m['title'],
+	                'id' => $m['film_id'],  
+	            );
+            }
+            
+            echo CJSON::encode($result);
+            Yii::app()->end();
+        }    
+    }
 
 	/**
 	 * Manages all models.
