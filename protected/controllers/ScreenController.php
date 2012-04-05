@@ -27,7 +27,7 @@ class ScreenController extends Controller
 	{
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('index','view','create','update','admin','delete'),
+				'actions'=>array('index','view','create','update','admin','delete','search'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -124,6 +124,27 @@ class ScreenController extends Controller
 			'dataProvider'=>$dataProvider,
 		));
 	}
+    
+    public function actionSearch()
+	{
+        if (isset($_GET['term'])) {            
+            $qtxt = "SELECT screen, screen_id FROM {{screen}} WHERE screen LIKE :screen";
+            $command = Yii::app()->db->createCommand($qtxt);
+            $command->bindValue(":screen", '%'.$_GET['term'].'%', PDO::PARAM_STR);
+            $res = $command->queryAll();
+            
+            $result = array();
+            foreach ($res as $m) {
+	            $result[] = array(
+	                'label' => $m['screen'],
+	                'id' => $m['screen_id'],  
+	            );
+            }
+            
+            echo CJSON::encode($result);
+            Yii::app()->end();
+        }    
+    }
 
 	/**
 	 * Manages all models.

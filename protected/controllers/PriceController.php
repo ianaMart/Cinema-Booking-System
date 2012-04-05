@@ -27,7 +27,7 @@ class PriceController extends Controller
 	{
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('index','view','create','update','admin','delete'),
+				'actions'=>array('index','view','create','update','admin','delete','search'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -124,6 +124,27 @@ class PriceController extends Controller
 			'dataProvider'=>$dataProvider,
 		));
 	}
+    
+    public function actionSearch()
+	{
+        if (isset($_GET['term'])) {            
+            $qtxt = "SELECT price, price_id FROM {{price}} WHERE price LIKE :price";
+            $command = Yii::app()->db->createCommand($qtxt);
+            $command->bindValue(":price", '%'.$_GET['term'].'%', PDO::PARAM_STR);
+            $res = $command->queryAll();
+            
+            $result = array();
+            foreach ($res as $m) {
+	            $result[] = array(
+	                'label' => $m['price'],
+	                'id' => $m['price_id'],  
+	            );
+            }
+            
+            echo CJSON::encode($result);
+            Yii::app()->end();
+        }    
+    }
 
 	/**
 	 * Manages all models.

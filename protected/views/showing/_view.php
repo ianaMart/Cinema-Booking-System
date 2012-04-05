@@ -9,7 +9,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('screen_id')); ?>:</b>
-	<?php echo CHtml::encode($data->screen_id); ?>
+	<?php echo CHtml::encode($data->screen->screen); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('start_date')); ?>:</b>

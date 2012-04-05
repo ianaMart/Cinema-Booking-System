@@ -23,7 +23,13 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'start_date'); ?>
-		<?php echo $form->textField($model,'start_date'); ?>
+		<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+			'model' => $model,
+			'attribute' => 'start_date',
+			'options' => array(
+				'dateFormat' => 'yy-mm-dd',
+				'minDate' => '0',)
+		)); ?>
 		<?php echo $form->error($model,'start_date'); ?>
 	</div>
 
@@ -44,5 +50,20 @@
 	</div>
 
 <?php $this->endWidget(); ?>
-
+<script>
+jQuery(function($) {
+    jQuery('#Showing_film_id').autocomplete({'showAnim':'fold','select':function(event, ui) {
+                $('#Showing_film_id').val(ui.item.id);
+                return false;
+            },'source':'/cinema/film/search'});
+    jQuery('#Showing_screen_id').autocomplete({'showAnim':'fold','select':function(event, ui) {
+                $('#Showing_screen_id').val(ui.item.id);
+                return false;
+            },'source':'/cinema/screen/search'});
+    jQuery('#Showing_price_id').autocomplete({'showAnim':'fold','select':function(event, ui) {
+                $('#Showing_price_id').val(ui.item.id);
+                return false;
+            },'source':'/cinema/price/search'});
+});
+</script>
 </div><!-- form -->

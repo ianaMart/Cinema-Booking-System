@@ -124,12 +124,12 @@ class ShowingController extends Controller
 	public function actionIndex()
 	{
         $date=date("Y-m-d");
-        $newdate = strtotime('-100 week', strtotime($date));
-        $newdate = date('Y-m-j', $newdate);
+        $newdate = strtotime('+6 week', strtotime($date));
+        $newdate = date('Y-m-d', $newdate);
 
 		$dataProvider=new CActiveDataProvider('Showing', array(
             'criteria'=>array(
-                'condition'=>'start_date BETWEEN :newdate AND :date',
+                'condition'=>'start_date BETWEEN :date AND :newdate',
                 'params'=>array(':date'=>$date, ':newdate'=>$newdate),
                 'order'=>'start_date ASC',
             ),
