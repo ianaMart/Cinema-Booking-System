@@ -10,7 +10,6 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->clientScript->getCoreScrip
     <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" media="screen, projection" />
 	<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />
     <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" media="screen, projection" />
-	<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/print.css" media="print" />
 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
     
