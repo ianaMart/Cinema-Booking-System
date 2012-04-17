@@ -126,7 +126,8 @@ class BookingController extends Controller
         $no_of_seats_available = $this->actionGetNoOfSeatsAvailable($_POST['showing_id']);
         
         if ($no_of_seats_available == 0) {
-            echo 'No seats available';
+            //echo 'No seats available';
+            echo '<option>No seats available</option>';
         }
         else if ($no_of_seats_available > 0) {
             $no_of_seats = array();

@@ -57,7 +57,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->clientScript->getCoreScrip
 				array('label'=>'Films', 'url'=>array('/film/index'), 'active'=>$this->id=='film'?true:false),
 				array('label'=>'Showings', 'url'=>array('/showing/index'), 'active'=>$this->id=='showing'?true:false),
 				array('label'=>'Booking', 'url'=>array('/booking/create'), 'active'=>$this->id=='booking'?true:false, 'visible'=>!Yii::app()->user->isGuest),
-                array('label'=>'Prices', 'url'=>array('/price/index'), 'active'=>$this->id=='user'?true:false, 'visible'=>Yii::app()->user->name=='admin'),
+                array('label'=>'Prices', 'url'=>array('/price/index'), 'active'=>$this->id=='price'?true:false, 'visible'=>Yii::app()->user->name=='admin'),
 				array('label'=>'User', 'url'=>array('/user/index'), 'active'=>$this->id=='user'?true:false, 'visible'=>Yii::app()->user->name=='admin'),                
 				array('label'=>'Screens', 'url'=>array('/screen/index'), 'active'=>$this->id=='screen'?true:false, 'visible'=>Yii::app()->user->name=='admin'),
 			),

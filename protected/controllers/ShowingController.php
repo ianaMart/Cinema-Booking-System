@@ -119,12 +119,13 @@ class ShowingController extends Controller
 	}
 
 	/**
-	 * Lists all models.
+	 * Displays the movies showing between today and 12 weeks ahead.
+     * Normally would only a weeks listings, but for demonstration purposes I have choosen 12 weeks.
 	 */
 	public function actionIndex()
 	{
         $date=date("Y-m-d");
-        $newdate = strtotime('+6 week', strtotime($date));
+        $newdate = strtotime('+12 week', strtotime($date));
         $newdate = date('Y-m-d', $newdate);
 
 		$dataProvider=new CActiveDataProvider('Showing', array(

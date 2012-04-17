@@ -94,13 +94,13 @@ class User extends CActiveRecord
 		));
 	}
 	
-	public function validatePassword($password)
-	{
-		return $this->hashPassword($password)===$this->password;
-	}
-	
 	public function hashPassword($password)
 	{
 		return crypt($password, $this->salt);
+	}
+	
+	public function validatePassword($password)
+	{
+		return $this->hashPassword($password)===$this->password;
 	}
 }
