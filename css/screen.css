@@ -156,13 +156,15 @@ h2 {font-size:1.5em;}
     opacity: 1;
 }
 
+.poster a {
+    color: white;
+    text-decoration: none;
+}
+
 #poster {
-    float: left;
 }
 
 #filminfo {
-    float: left;
-    margin-left: 20px;
 }
 
 #filminfo > ul {

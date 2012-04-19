@@ -19,7 +19,7 @@ if (Yii::app()->user->name != 'admin') {
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
-    'template' => "{sorter} {items} {pager}",    
+    'template' => "{sorter} {items} {pager}",
     'enableSorting'=>true,
     'sortableAttributes'=>array('title','year','runtime'),
-    )); ?>
+)); ?>

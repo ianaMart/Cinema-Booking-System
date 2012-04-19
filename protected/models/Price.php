@@ -40,7 +40,6 @@ class Price extends CActiveRecord
 		return array(
 			array('price', 'required'),
 			array('price', 'length', 'max'=>10),
-			// TODO: validate price if needed
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('price_id, price', 'safe', 'on'=>'search'),
