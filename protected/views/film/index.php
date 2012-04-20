@@ -21,5 +21,5 @@ if (Yii::app()->user->name != 'admin') {
 	'itemView'=>'_view',
     'template' => "{sorter} {items} {pager}",
     'enableSorting'=>true,
-    'sortableAttributes'=>array('title','year','runtime'),
+    'sortableAttributes'=>array('film_id','title','year','runtime'),
 )); ?>

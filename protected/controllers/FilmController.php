@@ -177,7 +177,16 @@ class FilmController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Film');
+        $sort = new CSort('Film');
+        $sort->defaultOrder=array('film_id'=>CSort::SORT_DESC);
+        
+        if (Yii::app()->user->name=='admin') {
+            $dataProvider=new CActiveDataProvider('Film', array('pagination'=>array('pageSize'=>12), 'sort'=>$sort));
+        }
+        else {
+            $dataProvider=new CActiveDataProvider('Film', array('pagination'=>array('pageSize'=>10), 'sort'=>$sort));
+        }
+        
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));

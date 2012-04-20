@@ -30,7 +30,12 @@ class SiteController extends Controller
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
 		// $this->render('index');
-		$dataProvider=new CActiveDataProvider('Film');
+        
+        $sort = new CSort('Film');
+        $sort->defaultOrder=array('film_id'=>CSort::SORT_DESC);
+        
+		$dataProvider=new CActiveDataProvider('Film', array('pagination'=>array('pageSize'=>10), 'sort'=>$sort));
+        
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
