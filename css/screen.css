@@ -132,11 +132,20 @@ h2 {font-size:1.5em;}
 .poster {
     position: relative;
     display: inline;
+    width: 180px;
+    height: 276px;
+    margin: 0;
+    overflow: hidden;
     
 }
+
+.posterimg {
+    display: inline;
+    margin: 0;
+}
 .poster p {
-    margin: 0 0 3px;
-    width: 100%;
+    margin: 0 3px 3px 0;
+    width: 180px;
     padding: 15px 0 40px;
     position: absolute;
     left: 0;
