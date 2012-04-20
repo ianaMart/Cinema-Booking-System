@@ -78,9 +78,31 @@ class BookingController extends Controller
             else
                 throw new CHttpException(400,'Showing has no seats available. Sold out.');
 		}
+        
+        $connection=Yii::app()->db;
+        $sql='SELECT DISTINCT f.film_id, title
+              FROM tbl_film AS f
+              INNER JOIN tbl_showing AS s
+              ON f.film_id=s.film_id
+              WHERE s.start_date BETWEEN :start_date AND :end_date
+              ORDER BY title ASC;';
+        
+        $start_date=date("Y-m-d");
+        $end_date = strtotime('+12 week', strtotime($start_date));
+        $end_date = date('Y-m-d', $end_date);
+
+        $command=$connection->createCommand($sql);
+        $start_date='2012-04-29';
+        $command->bindParam(":start_date",$start_date,PDO::PARAM_STR);
+        $command->bindParam(":end_date",$end_date,PDO::PARAM_STR);
+        $rows=$command->queryAll();
+
+        $filmlist=CHtml::listData($rows,'film_id','title');
 
 		$this->render('create',array(
 			'model'=>$model,
+            'filmlist'=>$filmlist
+            
 		));
 	}
 	
@@ -89,8 +111,14 @@ class BookingController extends Controller
 		$sql='SELECT start_date
 		      FROM tbl_showing
 			  WHERE film_id=:film_id
+              AND start_date BETWEEN :start_date AND :end_date
 			  ORDER BY start_date ASC';
-		$params=array(':film_id'=>(int) $_POST['film_id']);
+        
+        $start_date=date("Y-m-d");
+        $end_date = strtotime('+12 week', strtotime($start_date));
+        $end_date = date('Y-m-d', $end_date);
+        
+		$params=array(':film_id'=>(int) $_POST['film_id'], 'start_date'=>$start_date, ':end_date'=>$end_date);
 		
 		$data=Showing::model()->findAllBySql($sql,$params);
 		

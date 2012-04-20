@@ -14,4 +14,4 @@ if (Yii::app()->user->name=='admin') {
 
 <h1>Create Booking</h1>
 
-<?php echo $this->renderPartial('_create', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_create', array('model'=>$model,'filmlist'=>$filmlist)); ?>
