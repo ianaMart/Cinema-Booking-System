@@ -85,7 +85,7 @@ class BookingController extends Controller
               INNER JOIN tbl_showing AS s
               ON f.film_id=s.film_id
               WHERE s.start_date BETWEEN :start_date AND :end_date
-              ORDER BY title ASC;';
+              ORDER BY title ASC';
         
         $start_date=date("Y-m-d");
         $end_date = strtotime('+12 week', strtotime($start_date));
@@ -174,22 +174,10 @@ class BookingController extends Controller
 	}
     
     public function actionCalculateTotalPrice()
-    {
-        $connection=Yii::app()->db;
-        $sql='SELECT price
-              FROM {{price}} AS p
-              INNER JOIN {{showing}} AS h
-              ON h.price_id = p.price_id
-              WHERE h.showing_id = :showing;';
-        
-        $command=$connection->createCommand($sql);
-        $showing_id=$_POST['showing_id'];
-        $command->bindParam(":showing",$showing_id,PDO::PARAM_STR);
-        $row=$command->queryRow();
-        
+    {        
         if(isset($_POST['no_of_seats_booked']) && isset($_POST['showing_id']))
         {
-            echo $row['price'] * $_POST['no_of_seats_booked'];
+            echo $this->actionCalculatePrice($_POST['showing_id']) * $_POST['no_of_seats_booked'];
         }
         else
             echo 'Error';
@@ -205,7 +193,7 @@ class BookingController extends Controller
               ON h.showing_id = b.showing_id
               INNER JOIN {{screen}} AS c
               ON h.screen_id = c.screen_id
-              WHERE h.showing_id = :showing;';
+              WHERE h.showing_id = :showing';
         
         $command=$connection->createCommand($sql);
         $command->bindParam(":showing",$showing_id,PDO::PARAM_STR);
@@ -221,7 +209,7 @@ class BookingController extends Controller
               FROM {{price}} AS p
               INNER JOIN {{showing}} AS h
               ON h.price_id = p.price_id
-              WHERE h.showing_id = :showing;';
+              WHERE h.showing_id = :showing';
         
         $command=$connection->createCommand($sql);
         $command->bindParam(":showing",$showing_id,PDO::PARAM_STR);
