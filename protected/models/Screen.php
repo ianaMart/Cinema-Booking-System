@@ -42,6 +42,7 @@ class Screen extends CActiveRecord
 			array('screen_id, screen, seating_capacity', 'required'),
 			array('screen_id, seating_capacity', 'length', 'max'=>10),
 			array('screen', 'length', 'max'=>255),
+			array('screen','filter','filter'=>array($obj=new CHtmlPurifier(),'purify')),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('screen_id, screen, seating_capacity', 'safe', 'on'=>'search'),

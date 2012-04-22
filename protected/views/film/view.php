@@ -18,46 +18,46 @@ if (Yii::app()->user->name=='admin') {
 //}
 ?>
 
-<h1><?php echo $model->title; ?></h1>
+<h1><?php echo CHtml::encode($model->title); ?></h1>
 
 <div id="poster" class="span-5">
-<?php echo '<img src="' . Yii::app()->getBaseUrl() . '/images/posters/' . $model->film_id . '.jpg" alt="' . $model->title . ' Poster" />'; ?>
+<?php echo '<img src="' . Yii::app()->getBaseUrl() . '/images/posters/' . CHtml::encode($model->film_id) . '.jpg" alt="' . CHtml::encode($model->title) . ' Poster" />'; ?>
 </div>
 
 <div id="filminfo" class="span-14">
 <?php
 echo '<ul>';
-echo '<li><b>Title:</b> ' . $model->title . '</li>';
-echo '<li><b>Year:</b> ' . $model->year . '</li>';
+echo '<li><b>Title:</b> ' . CHtml::encode($model->title) . '</li>';
+echo '<li><b>Year:</b> ' . CHtml::encode($model->year) . '</li>';
 echo '<li><b>Genres:</b><ul>';
 foreach ($movie->genres as $genre) {
-  echo $genre . ', ';
+  echo CHtml::encode($genre) . ', ';
 }
 echo '</li></ul>';
 
 if ($movie->ratings->audience_score >= 0) {
-    echo '<li><b>Audience Rating:</b> ' . $movie->ratings->audience_score .  '%</li>';
+    echo '<li><b>Audience Rating:</b> ' . CHtml::encode($movie->ratings->audience_score) .  '%</li>';
 }
 if ($movie->ratings->critics_score >= 0) {
-    echo '<li><b>Critics Rating:</b> ' . $movie->ratings->critics_rating . ' (' . $movie->ratings->critics_score . '%)</li>';
+    echo '<li><b>Critics Rating:</b> ' . CHtml::encode($movie->ratings->critics_rating) . ' (' . CHtml::encode($movie->ratings->critics_score) . '%)</li>';
 }
 
-echo '<li><b>Runtime:</b> ' . $model->runtime . ' minutes</li>';
-echo '<li><b>MPAA Rating:</b> ' . $movie->mpaa_rating . '</li>';
+echo '<li><b>Runtime:</b> ' . CHtml::encode($model->runtime) . ' minutes</li>';
+echo '<li><b>MPAA Rating:</b> ' . CHtml::encode($movie->mpaa_rating) . '</li>';
 echo '<li><b>Cast:</b><ul>';
 foreach ($movie->abridged_cast as $cast) {
-  echo $cast->name . ', ';
+  echo CHtml::encode($cast->name) . ', ';
 }
 echo '</li></ul>';
 echo '</ul>';
 
 if ($movie->synopsis != null) {
-    echo '<p><b>Synopsis:</b> ' . $movie->synopsis . '</p>';
+    echo '<p><b>Synopsis:</b> ' . CHtml::encode($movie->synopsis) . '</p>';
 }
 
 if ($model->trailer != null) {
     echo '<h2>Trailer</h2>';
-    echo '<iframe width="560" height="315" src="http://www.youtube.com/embed/' . $model->trailer . '" frameborder="0" allowfullscreen></iframe>';
+    echo '<iframe width="560" height="315" src="http://www.youtube.com/embed/' . CHtml::encode($model->trailer) . '" frameborder="0" allowfullscreen></iframe>';
 }
 ?>
 </div>

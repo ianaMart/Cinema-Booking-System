@@ -47,9 +47,10 @@ class Film extends CActiveRecord
 			array('title, trailer', 'length', 'max'=>255),
 			array('year', 'length', 'max'=>4),
 			array('runtime', 'length', 'max'=>3),
+			array('title, trailer','filter','filter'=>array($obj=new CHtmlPurifier(),'purify')),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('film_id, rt_id, title, year, runtime, trailer', 'safe', 'on'=>'search'),
+			array('film_id, rt_id, title, year, runtime', 'safe', 'on'=>'search'),
 		);
 	}
 

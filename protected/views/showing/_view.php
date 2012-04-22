@@ -20,7 +20,7 @@
 	<?php echo CHtml::encode($data->start_time); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('price_id')); ?>:</b>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('price')); ?>:</b>
 	<?php echo CHtml::encode($data->price->price); ?>
 	<br />
 
