@@ -70,8 +70,8 @@ class FilmController extends Controller
         // decode the json data to make it easier to parse the php
         $movie = json_decode($data);
         
-        if ($movie === NULL)
-            die('Error parsing json');
+        //if ($movie === NULL)
+            //die('Error parsing json');
         
 		$this->render('view',array(
             'movie'=>$movie,
