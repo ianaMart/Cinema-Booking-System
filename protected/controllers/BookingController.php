@@ -92,7 +92,6 @@ class BookingController extends Controller
         $end_date = date('Y-m-d', $end_date);
 
         $command=$connection->createCommand($sql);
-        $start_date='2012-04-29';
         $command->bindParam(":start_date",$start_date,PDO::PARAM_STR);
         $command->bindParam(":end_date",$end_date,PDO::PARAM_STR);
         $rows=$command->queryAll();
