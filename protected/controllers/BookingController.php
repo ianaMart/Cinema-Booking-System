@@ -176,7 +176,8 @@ class BookingController extends Controller
     {        
         if(isset($_POST['no_of_seats_booked']) && isset($_POST['showing_id']))
         {
-            echo $this->actionCalculatePrice($_POST['showing_id']) * $_POST['no_of_seats_booked'];
+            $totalPrice = $this->actionCalculatePrice($_POST['showing_id']) * $_POST['no_of_seats_booked'];
+            echo number_format((float)$totalPrice, 2, '.', '');
         }
         else
             echo 'Error';
